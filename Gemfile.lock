@@ -58,10 +58,12 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.4.0)
     backports (3.18.2)
+    bcrypt (3.1.16)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    coderay (1.1.3)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     diff-lcs (1.4.4)
@@ -93,6 +95,9 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     json (2.3.1)
+    jsonapi-serializer (2.1.0)
+      activesupport (>= 4.2)
+    jwt (2.2.2)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.2.1)
@@ -119,6 +124,9 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     pg (1.2.3)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     puma (4.3.6)
       nio4r (~> 2.0)
     pusher-client (0.6.2)
@@ -212,12 +220,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   factory_bot_rails
   faker
+  jsonapi-serializer
+  jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
+  pry
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   rspec-rails

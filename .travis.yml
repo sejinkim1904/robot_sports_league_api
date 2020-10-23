@@ -2,18 +2,18 @@ language: ruby
 rvm:
 - 2.6.6
 cache:
-  - bundler
+- bundler
 services:
-  - postgresql
+- postgresql
 script:
-  - bundle install --jobs=3 --retry=3
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
-  - bundle exec rspec
+- bundle install --jobs=3 --retry=3
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+- bundle exec rspec
 deploy:
   provider: heroku
   api_key:
-    secure: 4ie8OT8QaM1oWeonMwKeKJVqeTdIsF3G+G2roNCuWMMw7DofnnGH33S7COJXqhB3NWVk9zU26FqW2W/Zc/CSkeW+C7uV9xPQ+c5C/wD6WLLX22B+xVAls10kI/VqyktEHreobvWU8kFJphhZg7e4lZvzpTr1dfwYaHjwpAdNz0AirKBLbW5QGunRQW5zwMwdoUa4Q7VxN/uqoAQ41XV/nqE2erUW9mhs2aWIJ8EKanKjQnkeH63ZJbdEkdfuf96QgYKeRbXi1CC8pdvbruDrc9pUyuUskPZxMHdTk7MNJXBiHxcDHPWTSVhG422s7jfZeRY+aCxGvkccaJ+noxjeYZzsOD6klUny4Vub4lHF12avK/MPaHQ/AmbKDWtLb1q4Wpwa2dLfGooqQxS6djooN9mp3c2sad86kxEefrNcgSRVVBMOCZZSh4UjAEBZl/xYkG2T/Gl87pCYi/DS2rvf215ep1XULJvI/Lf+YqUVHlSY/EvCN6dt3YjnI2BykckQDlXT2bkz8yXy+dRG1y0yOTi0jW7g/7eqBtsX0RlEtiVxmx/VR7SbFO8wG8hXMVzBGF3VN3B/oIbqYxEGNP8RNW6tYLTST9eGgFWHsnNPPxBqHjZPv3bzFgPO/vUKghq+AmLUFj22GoJnQtN/DsGQUq5rpZSQNQ94ERpZ+jGBKDc=
+    secure: 12M6mGXteoACqxMwAMRKUd+af9M+oaAn2FGnEN2Ra9ODZbbQyjqXdQC5zIQYxCUPYPmCs0rRh87QLNI0d5paWJpSZcdmohNqlmeSfqm+wlYJonqtnCBj1ypJ4v22EFUDLdspzaSO7flYpOZMhBd1mZ6nJ0SWKAMJcRCsIZ0qNhCfkEu2+3c7tGVNzilh5HT14vuegTZg9G8RUvBv9vU6TjROp+YhpJaOBnF+jh8lHW7N7G9XzvWA2Wlc8CcxAZlK+zRtFrq3VlL5+5+2f5co5u3e5tYGO3XKW5x0YAQ3BJ8BvJpcjYt3IlQ6vpq7NURLikeinslVvax/sdGGSyi+ksGpBSikyYtlv4YpY4IgUxRoARqqattMvghyLOTVjBTWXwniTWEbwgIHvjIVfy44jYV1f1zrnnuMWBNd+jmUK36KVGiX0uKZDw4CMnT6bdpKYk2GbxoHNrMFKcZAd2EAIErVqFRafYrYxbc/K+mfy5iwKlnKmkc6fGuXVdrFJYGmQvAVw5kr5CV52TvsTFgvvMxlQf4EJjwZeG2nyZrOAg7RxiWme9VYbx8NVXYdgeT262EEVGsFzUuWHAvTm4tnS+o+YHKktpwwdQtJqk8/Sszh/WP3qVmMhQ4UWEIwMGCWMSo8PfklPkfDTzl+dtLxcFEo9m97+OqutgUW+M7Bvmc=
   app: calm-escarpment-13056
   on:
     repo: sejinkim1904/robot_sports_league_api

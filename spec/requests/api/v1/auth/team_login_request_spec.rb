@@ -16,7 +16,7 @@ describe 'Team login request' do
       expect(response.status).to eq(200)
 
       token = JSON.parse(response.body)
-      
+
       expect(token['token']).to eq('exampletoken')
     end
   end

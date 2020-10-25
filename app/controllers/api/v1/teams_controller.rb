@@ -32,7 +32,7 @@ module Api
           :email,
           :password,
           :password_confirmation,
-          :team_name
+          :name
         )
       end
     end

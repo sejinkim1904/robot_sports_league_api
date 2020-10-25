@@ -3,7 +3,7 @@ class CreateTeams < ActiveRecord::Migration[6.0]
     create_table :teams do |t|
       t.string :email
       t.string :password_digest
-      t.string :team_name
+      t.string :name
 
       t.timestamps
     end

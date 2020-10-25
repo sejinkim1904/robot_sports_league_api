@@ -5,7 +5,7 @@ describe 'Team auto login request' do
 
   context 'with Authorization token' do
     it 'returns logged in team' do
-      allow(JWT).to receive(:decode).and_return([{ 'team_id' => new_team.id }])
+      auth_team(new_team)
 
       get '/api/v1/auto_login', headers: {
         'Authorization': 'Bearer token'
@@ -19,7 +19,7 @@ describe 'Team auto login request' do
       expect(team['data']).to have_key('id')
       expect(team['data']['type']).to eq('team')
       expect(team['data']['attributes']).to have_key('email')
-      expect(team['data']['attributes']).to have_key('team_name')
+      expect(team['data']['attributes']).to have_key('name')
     end
   end
 

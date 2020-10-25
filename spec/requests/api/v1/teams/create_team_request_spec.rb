@@ -7,7 +7,7 @@ describe 'Create team request' do
         email: 'team@team.com',
         password: '12345',
         password_confirmation: '12345',
-        team_name: 'Voltron'
+        name: 'Voltron'
       }
 
       expect(response).to be_successful
@@ -18,7 +18,7 @@ describe 'Create team request' do
       expect(team['data']).to have_key('id')
       expect(team['data']['type']).to eq('team')
       expect(team['data']['attributes']).to have_key('email')
-      expect(team['data']['attributes']).to have_key('team_name')
+      expect(team['data']['attributes']).to have_key('name')
     end
   end
 
@@ -31,7 +31,7 @@ describe 'Create team request' do
 
       error = JSON.parse(response.body)
       message = "Password can't be blank, Email can't be" \
-                " blank, Email is invalid, and Team name can't be blank"
+                " blank, Email is invalid, and Name can't be blank"
 
       expect(error['error']).to eq(message)
     end

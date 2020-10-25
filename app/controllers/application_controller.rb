@@ -6,6 +6,8 @@ class ApplicationController < ActionController::API
   end
 
   def secret
+    return ENV['SECRET_KEY_BASE'] if Rails.env == 'production'
+
     Rails.application.credentials.secret_key_base
   end
 

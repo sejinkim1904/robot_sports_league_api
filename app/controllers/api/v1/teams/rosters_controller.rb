@@ -17,6 +17,20 @@ module Api
         def index
           render json: RosterSerializer.new(@team.current_roster), status: :ok
         end
+
+        def create
+          if @team.current_roster.empty?
+            @team.rosters.appoint_roles(
+              params['starters'],
+              params['alternates']
+            )
+
+            render json: RosterSerializer.new(@team.current_roster),
+                   status: :created
+          else
+            render json: { error: 'Roster already exists' }, status: :conflict
+          end
+        end
       end
     end
   end

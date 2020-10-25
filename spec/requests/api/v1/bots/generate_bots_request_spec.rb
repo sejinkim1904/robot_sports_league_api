@@ -7,7 +7,7 @@ describe 'Generate bots request' do
     it 'returns 100 bots with unique attributes' do
       auth_team(new_team)
 
-      post "/api/v1/teams/#{new_team.id}/bots"
+      post '/api/v1/teams/bots'
 
       expect(response).to be_successful
       expect(response.status).to eq(201)
@@ -26,7 +26,7 @@ describe 'Generate bots request' do
 
   context 'Without valid token' do
     it 'returns error message' do
-      post "/api/v1/teams/#{new_team.id}/bots"
+      post '/api/v1/teams/bots'
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)

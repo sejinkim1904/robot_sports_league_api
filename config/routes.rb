@@ -4,7 +4,8 @@ Rails.application.routes.draw do
       resources :teams, only: [:create, :update]
 
       namespace :teams do
-        resources :bots, only: [:create]
+        resources :bots, only: [:index]
+        post '/generate_bots', to: 'bots#create'
         post '/generate_roster', to: 'rosters#generate_roster'
       end
 

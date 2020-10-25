@@ -1,16 +1,17 @@
 require 'rails_helper'
 
-describe 'Generate bots request' do
+describe 'Get teams bots request' do
   let!(:new_team) { create :team }
 
-  context 'with a valid token' do
-    it 'returns 100 bots with unique attributes' do
+  context 'with valid token' do
+    it 'returns the teams bots' do
       auth_team(new_team)
+      new_team.generate_bots
 
-      post '/api/v1/teams/generate_bots'
+      get '/api/v1/teams/bots'
 
       expect(response).to be_successful
-      expect(response.status).to eq(201)
+      expect(response.status).to eq(200)
 
       bots = JSON.parse(response.body)
 
@@ -24,25 +25,9 @@ describe 'Generate bots request' do
     end
   end
 
-  context 'Bots already generated' do
-    it 'returns error message' do
-      new_team.generate_bots
-      auth_team(new_team)
-
-      post '/api/v1/teams/generate_bots'
-
-      expect(response).to_not be_successful
-      expect(response.status).to eq(409)
-
-      error = JSON.parse(response.body)
-
-      expect(error['error']).to eq('Bots already generated')
-    end
-  end
-
   context 'Without valid token' do
     it 'returns error message' do
-      post '/api/v1/teams/generate_bots'
+      get '/api/v1/teams/bots'
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)

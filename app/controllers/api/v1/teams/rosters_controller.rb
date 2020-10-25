@@ -31,6 +31,17 @@ module Api
             render json: { error: 'Roster already exists' }, status: :conflict
           end
         end
+
+        def update
+          @team.delete_roster
+          @team.rosters.appoint_roles(
+            params['starters'],
+            params['alternates']
+          )
+
+          render json: RosterSerializer.new(@team.current_roster),
+                 status: :ok
+        end
       end
     end
   end

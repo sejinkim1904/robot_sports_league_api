@@ -13,6 +13,10 @@ module Api
             render json: { error: 'Please generate bots' }, status: :conflict
           end
         end
+
+        def index
+          render json: RosterSerializer.new(@team.current_roster), status: :ok
+        end
       end
     end
   end

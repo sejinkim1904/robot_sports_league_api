@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         get '/roster', to: 'rosters#index'
         post '/roster', to: 'rosters#create'
         patch '/roster', to: 'rosters#update'
+        delete '/roster', to: 'rosters#destroy'
       end
 
       resources :teams, only: [:create, :update]

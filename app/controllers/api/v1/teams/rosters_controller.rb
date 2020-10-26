@@ -42,6 +42,12 @@ module Api
           render json: RosterSerializer.new(@team.current_roster),
                  status: :ok
         end
+
+        def destroy
+          @team.delete_roster
+
+          render json: { message: 'Roster has been deleted.' }, status: :ok
+        end
       end
     end
   end

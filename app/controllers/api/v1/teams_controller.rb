@@ -16,11 +16,11 @@ module Api
       end
 
       def update
-        if @team.update(team_params)
-          render json: TeamSerializer.new(@team), status: :ok
+        if current_team.update(team_params)
+          render json: TeamSerializer.new(current_team), status: :ok
         else
           render json: {
-            error: @team.errors.full_messages.to_sentence
+            error: current_team.errors.full_messages.to_sentence
           }, status: :conflict
         end
       end

@@ -3,11 +3,11 @@ module Api
     module Teams
       class RostersController < ApplicationController
         def generate_roster
-          if @team.bots.present?
-            @team.delete_roster if @team.current_roster.present?
-            @team.generate_roster
+          if current_team.bots.present?
+            current_team.delete_roster if current_team.current_roster.present?
+            current_team.generate_roster
 
-            render json: RosterSerializer.new(@team.current_roster),
+            render json: RosterSerializer.new(current_team.current_roster),
                    status: :created
           else
             render json: { error: 'Please generate bots' }, status: :conflict
@@ -15,17 +15,17 @@ module Api
         end
 
         def index
-          render json: RosterSerializer.new(@team.current_roster), status: :ok
+          render json: RosterSerializer.new(current_team.current_roster), status: :ok
         end
 
         def create
-          if @team.current_roster.empty?
-            @team.rosters.appoint_roles(
+          if current_team.current_roster.empty?
+            current_team.rosters.appoint_roles(
               params['starters'],
               params['alternates']
             )
 
-            render json: RosterSerializer.new(@team.current_roster),
+            render json: RosterSerializer.new(current_team.current_roster),
                    status: :created
           else
             render json: { error: 'Roster already exists' }, status: :conflict
@@ -33,18 +33,18 @@ module Api
         end
 
         def update
-          @team.delete_roster
-          @team.rosters.appoint_roles(
+          current_team.delete_roster
+          current_team.rosters.appoint_roles(
             params['starters'],
             params['alternates']
           )
 
-          render json: RosterSerializer.new(@team.current_roster),
+          render json: RosterSerializer.new(current_team.current_roster),
                  status: :ok
         end
 
         def destroy
-          @team.delete_roster
+          current_team.delete_roster
 
           render json: { message: 'Roster has been deleted.' }, status: :ok
         end

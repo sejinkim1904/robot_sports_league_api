@@ -3,8 +3,8 @@ module Api
     module Teams
       class BotsController < ApplicationController
         def create
-          if @team.bots.empty?
-            render json: BotSerializer.new(@team.generate_bots),
+          if current_team.bots.empty?
+            render json: BotSerializer.new(current_team.generate_bots),
                    status: :created
           else
             render json: { error: 'Bots already generated' }, status: :conflict
@@ -12,7 +12,7 @@ module Api
         end
 
         def index
-          render json: BotSerializer.new(@team.bots), status: :ok
+          render json: BotSerializer.new(current_team.bots), status: :ok
         end
       end
     end

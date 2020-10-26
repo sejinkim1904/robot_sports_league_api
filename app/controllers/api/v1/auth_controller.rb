@@ -17,8 +17,8 @@ module Api
       end
 
       def auto_login
-        if session_team
-          render json: TeamSerializer.new(session_team), status: :ok
+        if current_team
+          render json: TeamSerializer.new(current_team), status: :ok
         else
           render json: {
             error: 'No user logged in'

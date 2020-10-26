@@ -28,15 +28,15 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def session_team
+  def current_team
     return unless decode_token.present?
 
     team_id = decode_token[0]['team_id']
-    @team = Team.find(team_id)
+    @current_team ||= Team.find(team_id)
   end
 
   def logged_in?
-    !!session_team
+    !!current_team
   end
 
   def require_login

@@ -18,8 +18,8 @@ describe Bot do
   end
 
   context 'relations' do
-    it { should have_many(:rosters) }
-    it { should have_many(:teams) }
+    it { should have_one(:roster) }
+    it { should have_one(:team) }
   end
 
   context 'instance method' do
@@ -28,17 +28,19 @@ describe Bot do
     let!(:ultra_bot) { create :bot, speed: 50, strength: 50, agility: 50 }
     let!(:average_bot) { create :bot, speed: 10, strength: 10, agility: 10 }
 
-    it '#normalize_stats' do
-      expect(super_bot).to receive(:normalize_stats)
-      super_bot.save
-      expect(basic_bot).to_not receive(:normalize_stats)
-      basic_bot.save
-      expect(ultra_bot.speed).to eq(33)
-      expect(ultra_bot.strength).to eq(33)
-      expect(ultra_bot.agility).to eq(33)
-      expect(average_bot.speed).to eq(10)
-      expect(average_bot.strength).to eq(10)
-      expect(average_bot.agility).to eq(10)
+    context '#normalize_stats' do
+      it 'reduces total stats if > 100' do
+        expect(super_bot).to receive(:normalize_stats)
+        super_bot.save
+        expect(basic_bot).to_not receive(:normalize_stats)
+        basic_bot.save
+        expect(ultra_bot.speed).to eq(33)
+        expect(ultra_bot.strength).to eq(33)
+        expect(ultra_bot.agility).to eq(33)
+        expect(average_bot.speed).to eq(10)
+        expect(average_bot.strength).to eq(10)
+        expect(average_bot.agility).to eq(10)
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 class Bot < ApplicationRecord
-  has_many :rosters, dependent: :destroy
-  has_many :teams, through: :rosters
+  has_one :roster, dependent: :destroy
+  has_one :team, through: :roster
 
   validates_presence_of :name, :speed, :strength, :agility
   validates_numericality_of :speed,
@@ -21,4 +21,9 @@ class Bot < ApplicationRecord
   def stats_too_high?
     (speed + strength + agility) > 100
   end
+
+  # Class method to get ids from bots with unique ids
+  # def self.unique_name_ids
+  #   select('DISTINCT ON(bots.name) bots.*').pluck(:id)
+  # end
 end

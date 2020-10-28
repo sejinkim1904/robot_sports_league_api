@@ -2,6 +2,7 @@ module Api
   module V1
     class AuthController < ApplicationController
       skip_before_action :require_login, only: [:login, :auto_login]
+
       def login
         team = Team.find_by(email: params[:email])
 

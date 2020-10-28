@@ -27,13 +27,11 @@ POST /api/v1/teams
 ```
 
 Params:
-```json
-{
-  name: Average Joes,
-  email: average@joes.com
-  password: password,
-  password_confirmation: password
-}
+```
+name: Average Joes,
+email: average@joes.com
+password: password,
+password_confirmation: password
 ```
 
 Example response:
@@ -58,11 +56,9 @@ POST /api/v1/login
 ```
 
 Params:
-```json
-{
-  email: average@joes.com,
-  password: password
-}
+```
+email: average@joes.com,
+password: password
 ```
 
 Example response:
@@ -112,10 +108,8 @@ Authorization: Bearer tHiSiSaNeXaMpLeToKeN
 ```
 
 Params:
-```json
-{
-  name: Above Average Joes
-}
+```
+name: Above Average Joes
 ```
 
 Example response:
@@ -401,10 +395,8 @@ Authorization: Bearer tHiSiSaNeXaMpLeToKeN
 ```
 
 Params:
-```json
-{
-  role: benchwarmer
-}
+```
+role: benchwarmer
 ```
 
 Example response:

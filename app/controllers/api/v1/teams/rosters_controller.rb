@@ -14,8 +14,12 @@ module Api
           end
         end
 
+        def current_roster
+          render json: RosterSerializer.new(current_team.current_roster)
+        end
+
         def index
-          render json: RosterSerializer.new(current_team.current_roster),
+          render json: RosterSerializer.new(current_team.rosters),
                  status: :ok
         end
 

@@ -54,6 +54,7 @@ describe 'Update roster request' do
       team.generate_bots
       team.generate_roster
       benchwarmer = team.rosters.benchwarmer.first
+      benchwarmer.update(total_stats: 0)
 
       patch "/api/v1/teams/roster/#{benchwarmer.id}", params: {
         role: 'alternate'

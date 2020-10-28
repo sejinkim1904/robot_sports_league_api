@@ -1,73 +1,75 @@
-require 'rails_helper'
+# Removed create action. See comments in rosters_controller
 
-describe 'Create roster request' do
-  let!(:team) { create :team }
+# require 'rails_helper'
 
-  context 'with valid token' do
-    it 'returns created roster' do
-      auth_team(team)
-      team.generate_bots
+# describe 'Create roster request' do
+#   let!(:team) { create :team }
 
-      post '/api/v1/teams/roster', params: {
-        starters: team.bots[0..9].map(&:id),
-        alternates: team.bots[10..14].map(&:id)
-      }
+#   context 'with valid token' do
+#     it 'returns created roster' do
+#       auth_team(team)
+#       team.generate_bots
 
-      expect(response).to be_successful
-      expect(response.status).to eq(201)
+#       post '/api/v1/teams/roster', params: {
+#         starters: team.bots[0..9].map(&:id),
+#         alternates: team.bots[10..14].map(&:id)
+#       }
 
-      roster = JSON.parse(response.body)
+#       expect(response).to be_successful
+#       expect(response.status).to eq(201)
 
-      expect(roster['data'].size).to eq(15)
-      expect(roster['data'][0]).to have_key('id')
-      expect(roster['data'][0]['type']).to eq('roster')
-      expect(roster['data'][0]['attributes']).to have_key('team')
-      expect(roster['data'][0]['attributes']).to have_key('role')
-      expect(roster['data'][0]['attributes']).to have_key('total_stats')
-      expect(roster['data'][0]['attributes']).to have_key('bot')
+#       roster = JSON.parse(response.body)
 
-      starters = roster['data'].find_all do |roster_bot|
-        roster_bot['attributes']['role'] == 'starter'
-      end
-      expect(starters.size).to eq(10)
+#       expect(roster['data'].size).to eq(15)
+#       expect(roster['data'][0]).to have_key('id')
+#       expect(roster['data'][0]['type']).to eq('roster')
+#       expect(roster['data'][0]['attributes']).to have_key('team')
+#       expect(roster['data'][0]['attributes']).to have_key('role')
+#       expect(roster['data'][0]['attributes']).to have_key('total_stats')
+#       expect(roster['data'][0]['attributes']).to have_key('bot')
 
-      alternates = roster['data'].find_all do |roster_bot|
-        roster_bot['attributes']['role'] == 'alternate'
-      end
-      expect(alternates.size).to eq(5)
-    end
-  end
+#       starters = roster['data'].find_all do |roster_bot|
+#         roster_bot['attributes']['role'] == 'starter'
+#       end
+#       expect(starters.size).to eq(10)
 
-  context 'Roster already exists' do
-    it 'returns error message' do
-      auth_team(team)
-      team.generate_bots
-      team.generate_roster
+#       alternates = roster['data'].find_all do |roster_bot|
+#         roster_bot['attributes']['role'] == 'alternate'
+#       end
+#       expect(alternates.size).to eq(5)
+#     end
+#   end
 
-      post '/api/v1/teams/roster', params: {
-        starters: team.bots[0..9].map(&:id),
-        alternates: team.bots[10..14].map(&:id)
-      }
+#   context 'Roster already exists' do
+#     it 'returns error message' do
+#       auth_team(team)
+#       team.generate_bots
+#       team.generate_roster
 
-      expect(response).to_not be_successful
-      expect(response.status).to eq(409)
+#       post '/api/v1/teams/roster', params: {
+#         starters: team.bots[0..9].map(&:id),
+#         alternates: team.bots[10..14].map(&:id)
+#       }
 
-      error = JSON.parse(response.body)
+#       expect(response).to_not be_successful
+#       expect(response.status).to eq(409)
 
-      expect(error['error']).to eq('Roster already exists')
-    end
-  end
+#       error = JSON.parse(response.body)
 
-  context 'Without valid token' do
-    it 'returns error message' do
-      post '/api/v1/teams/generate_roster'
+#       expect(error['error']).to eq('Roster already exists')
+#     end
+#   end
 
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
+#   context 'Without valid token' do
+#     it 'returns error message' do
+#       post '/api/v1/teams/generate_roster'
 
-      error = JSON.parse(response.body)
+#       expect(response).to_not be_successful
+#       expect(response.status).to eq(401)
 
-      expect(error['error']).to eq('Please Login')
-    end
-  end
-end
+#       error = JSON.parse(response.body)
+
+#       expect(error['error']).to eq('Please Login')
+#     end
+#   end
+# end

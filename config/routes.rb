@@ -6,8 +6,7 @@ Rails.application.routes.draw do
         post '/generate_bots', to: 'bots#create'
         post '/generate_roster', to: 'rosters#generate_roster'
         get '/roster', to: 'rosters#index'
-        post '/roster', to: 'rosters#create'
-        patch '/roster', to: 'rosters#update'
+        patch '/roster/:id', to: 'rosters#update'
         delete '/roster', to: 'rosters#destroy'
       end
 

@@ -33,22 +33,16 @@ describe Roster do
       end
     end
 
-    context '.appoint_roles' do
-      it 'sets roles for given bot ids' do
-        roster1 = create :roster, team: team_1, bot: bot_1
-        roster2 = create :roster, team: team_1, bot: bot_2
-        roster3 = create :roster, team: team_1, bot: bot_3
-        roster4 = create :roster, team: team_1, bot: bot_4
+    context '.bot_names' do
+      it 'returns bot names' do
+        create :roster, team: team_1, bot: bot_1
+        create :roster, team: team_1, bot: bot_2
+        create :roster, team: team_1, bot: bot_3
+        create :roster, team: team_1, bot: bot_4
 
-        starter_ids = [bot_1.id, bot_2.id]
-        alternate_ids = [bot_3.id, bot_4.id]
-
-        Roster.appoint_roles(starter_ids, alternate_ids)
-
-        expect(roster1.reload.role).to eq('starter')
-        expect(roster2.reload.role).to eq('starter')
-        expect(roster3.reload.role).to eq('alternate')
-        expect(roster4.reload.role).to eq('alternate')
+        expect(Roster.bot_names).to contain_exactly(
+          bot_1.name, bot_2.name, bot_3.name, bot_4.name
+        )
       end
     end
   end
